@@ -1,0 +1,18 @@
+#!/bin/bash
+
+function check
+{
+  class=$(echo $1 | sed "s/.class//g" | sed "s/^src.//g")
+  expected=""
+  actual=$($JAVA -cp src $class)
+  if [ "$?" != "0" ]; then
+    echo "$class: Test FAILED"
+    exit 1
+  fi
+}
+
+for t in $(find src -name "*Test.class"); do
+  check $t
+done
+
+echo "Tests OK"

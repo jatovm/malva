@@ -1,0 +1,31 @@
+Malva
+=====
+
+What is Malva?
+--------------
+
+Malva is a test suite for alternative JVMs. It tests core Java API classes such
+as java.lang.Class and java.lang.Object that require implementation on the JVM
+side.
+
+Running the Test Suite
+----------------------
+
+To compile the test suite with 'javac' and run the tests with 'java' use:
+
+  make check
+
+All tests should pass.
+
+If you want to use an alternative compiler or JVM pass the JAVAC and JAVA
+options to make:
+
+  make check JAVAC=ecj JAVA=cacao
+
+Licensing
+---------
+
+Copyright (C) 2010 Pekka Enberg
+
+Malva is licensed under the Apache License version 2.0. See the file LICENSE
+for details.
