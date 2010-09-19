@@ -80,16 +80,76 @@ public class ClassTest extends TestCase {
   // isAnnotation
   // isAnnotationPresent
   // isAnonymousClass
-  // isArray
+
+  public static void testIsArray() {
+    assertFalse(Object.class.isArray());
+    assertFalse(int.class.isArray());
+    assertTrue(Object[].class.isArray());
+    assertTrue(int[].class.isArray());
+  }
+
   // isAssignableFrom
-  // isEnum
-  // isInstance
-  // isInterface
+
+  public static void testIsEnum() {
+    assertTrue(Enumeration.class.isEnum());
+    assertFalse(Enum.class.isEnum());
+    assertFalse(Object.class.isEnum());
+  }
+  private static enum Enumeration { };
+
+  public static void testIsInstance() {
+    assertTrue (Throwable.class.isInstance(new Throwable()));
+    assertTrue (Throwable.class.isInstance(new Exception()));
+    assertFalse(Throwable.class.isInstance(new Object()   ));
+  }
+
+  public static void testIsInterface() {
+    assertFalse(Object.class.isInterface());
+    assertTrue(Runnable.class.isInterface());
+  }
+
   // isLocalClass
   // isMemberClass
-  // isPrimitive
+
+  public static void testIsPrimitive() {
+    assertFalse(Object.class.isPrimitive());
+    assertFalse(Object[].class.isPrimitive());
+    assertFalse(int[].class.isPrimitive());
+    assertTrue(int.class.isPrimitive());
+  }
+
   // isSynthetic
-  // newInstance
+
+  public static void testNewInstance() throws Exception {
+    assertNotNull(Object.class.newInstance());
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        ClassLoader.class.newInstance();
+      }
+    }, IllegalAccessException.class);
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        Double.class.newInstance();
+      }
+    }, InstantiationException.class);
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        FailingInitializer.class.newInstance();
+      }
+    }, ExceptionInInitializerError.class);
+    // TODO: SecurityException
+  }
+  public static class FailingInitializer {
+    static {
+      try {
+        // Throws IllegalMonitorStateException
+        new Object().wait();
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+
   // toString
 
   public static void main(String[] args) throws Exception {
@@ -97,5 +157,11 @@ public class ClassTest extends TestCase {
     testCast();
     testDesiredAssertionStatus();
     testForName();
+    testIsArray();
+    testIsEnum();
+    testIsInstance();
+    testIsInterface();
+    testIsPrimitive();
+    testNewInstance();
   }
 }

@@ -15,6 +15,10 @@ public class TestCase {
     fail("Expected " + type.toString() + " to be thrown");
   }
 
+  protected static void assertTrue(boolean actual) {
+    assertEquals(true, actual);
+  }
+
   protected static void assertFalse(boolean actual) {
     assertEquals(false, actual);
   }
