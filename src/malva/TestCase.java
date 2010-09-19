@@ -31,6 +31,11 @@ public class TestCase {
       fail("Expected " + expected + ", but was: " + actual);
   }
 
+  protected static void assertNull(Object o) {
+    if (o != null)
+       fail("Expected null, but was: " + o);
+  }
+
   protected static void assertNotNull(Object o) {
     if (o == null)
        fail("Expected non-null, but was: null");

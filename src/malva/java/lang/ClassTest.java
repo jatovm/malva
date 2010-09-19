@@ -68,7 +68,16 @@ public class ClassTest extends TestCase {
   // getMethod
   // getMethods
   // getModifiers
-  // getName
+
+  public static void testGetName() {
+    assertEquals("int", int.class.getName());
+    assertEquals("[I", int[].class.getName());
+    assertEquals("[[I", int[][].class.getName());
+    assertEquals("java.lang.Object", Object.class.getName());
+    assertEquals("[Ljava.lang.Object;", Object[].class.getName());
+    assertEquals("malva.java.lang.ClassTest$InnerClass", InnerClass.class.getName());
+  }
+
   // getPackage
   // getProtectionDomain
   // getResource
@@ -76,16 +85,23 @@ public class ClassTest extends TestCase {
   // getSigners
 
   public static void testGetSimpleName() {
+    assertEquals("int", int.class.getSimpleName());
+    assertEquals("int[]", int[].class.getSimpleName());
+    assertEquals("int[][]", int[][].class.getSimpleName());
+    assertEquals("Object[]", Object[].class.getSimpleName());
     assertEquals("Object", Object.class.getSimpleName());
     assertEquals("InnerClass", InnerClass.class.getSimpleName());
   }
   public static class InnerClass { };
 
-  // getSuperclass
+  public static void testGetSuperclass() {
+    assertNull(Object.class.getSuperclass());
+    assertEquals(Throwable.class, Exception.class.getSuperclass());
+  }
+
   // getTypeParameters
   // isAnnotation
   // isAnnotationPresent
-  // isAnonymousClass
 
   public static void testIsAnonymousClass() {
     assertFalse(Object.class.isAnonymousClass());
@@ -99,7 +115,16 @@ public class ClassTest extends TestCase {
     assertTrue(int[].class.isArray());
   }
 
-  // isAssignableFrom
+  public static void testIsAssignableFrom() {
+    assertTrue (Throwable.class.isAssignableFrom(Throwable.class));
+    assertTrue (Throwable.class.isAssignableFrom(Exception.class));
+    assertFalse(Throwable.class.isAssignableFrom(Object.class   ));
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        Throwable.class.isAssignableFrom(null);
+      }
+    }, NullPointerException.class);
+  }
 
   public static void testIsEnum() {
     assertTrue(Enumeration.class.isEnum());
@@ -119,8 +144,19 @@ public class ClassTest extends TestCase {
     assertTrue(Runnable.class.isInterface());
   }
 
-  // isLocalClass
-  // isMemberClass
+  public static void testIsLocalClass() {
+    assertFalse(Object.class.isLocalClass());
+    class LocalClass {
+    }
+    assertTrue(LocalClass.class.isLocalClass());
+  }
+
+  public static void testIsMemberClass() {
+    assertFalse(Object.class.isMemberClass());
+    assertTrue(MemberClass.class.isMemberClass());
+  }
+  protected class MemberClass {
+  }
 
   public static void testIsPrimitive() {
     assertFalse(Object.class.isPrimitive());
@@ -129,7 +165,10 @@ public class ClassTest extends TestCase {
     assertTrue(int.class.isPrimitive());
   }
 
-  // isSynthetic
+  public static void testIsSynthetic() {
+    assertFalse(Object.class.isSynthetic());
+    // FIXME: Synthetic classes?
+  }
 
   public static void testNewInstance() throws Exception {
     assertNotNull(Object.class.newInstance());
@@ -161,20 +200,29 @@ public class ClassTest extends TestCase {
     }
   }
 
-  // toString
+  public static void testToString() {
+    assertEquals("class java.lang.Object", Object.class.toString());
+  }
 
   public static void main(String[] args) throws Exception {
     testAsSubclass();
     testCast();
     testDesiredAssertionStatus();
     testForName();
+    testGetName();
     testGetSimpleName();
+    testGetSuperclass();
     testIsAnonymousClass();
     testIsArray();
+    testIsAssignableFrom();
     testIsEnum();
     testIsInstance();
     testIsInterface();
+    testIsLocalClass();
+    testIsMemberClass();
     testIsPrimitive();
+    testIsSynthetic();
     testNewInstance();
+    testToString();
   }
 }
