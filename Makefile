@@ -29,7 +29,7 @@ all: $(CLASSES)
 
 check: $(CLASSES)
 	$(E) "  CHECK"
-	$(Q) $(SHELL) ./scripts/suite
+	$(Q) ./scripts/suite
 .PHONY: check
 
 clean:
