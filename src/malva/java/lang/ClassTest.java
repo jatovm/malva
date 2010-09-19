@@ -74,12 +74,23 @@ public class ClassTest extends TestCase {
   // getResource
   // getResourceAsStream
   // getSigners
-  // getSimpleName
+
+  public static void testGetSimpleName() {
+    assertEquals("Object", Object.class.getSimpleName());
+    assertEquals("InnerClass", InnerClass.class.getSimpleName());
+  }
+  public static class InnerClass { };
+
   // getSuperclass
   // getTypeParameters
   // isAnnotation
   // isAnnotationPresent
   // isAnonymousClass
+
+  public static void testIsAnonymousClass() {
+    assertFalse(Object.class.isAnonymousClass());
+    assertTrue(new Object() {}.getClass().isAnonymousClass());
+  }
 
   public static void testIsArray() {
     assertFalse(Object.class.isArray());
@@ -157,6 +168,8 @@ public class ClassTest extends TestCase {
     testCast();
     testDesiredAssertionStatus();
     testForName();
+    testGetSimpleName();
+    testIsAnonymousClass();
     testIsArray();
     testIsEnum();
     testIsInstance();
