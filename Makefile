@@ -34,5 +34,5 @@ check: $(CLASSES)
 
 clean:
 	$(E) "  CLEAN"
-	$(Q) rm -f $(CLASSES)
+	$(Q) find src/ -name "*.class" | xargs rm
 .PHONY: clean
