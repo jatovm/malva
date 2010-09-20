@@ -1,5 +1,7 @@
 package malva.java.lang;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import malva.TestCase;
 
 public class ClassTest extends TestCase {
@@ -40,7 +42,11 @@ public class ClassTest extends TestCase {
     }, ClassNotFoundException.class);
   }
 
-  // getAnnotations
+  public static void testGetAnnotations() {
+    assertEquals(0, Object.class.getAnnotations().length);
+    assertEquals(1, AnnotatedClass.class.getAnnotations().length);
+  }
+
   // getCanonicalName
   // getClasses
   // getClassLoader
@@ -100,8 +106,20 @@ public class ClassTest extends TestCase {
   }
 
   // getTypeParameters
-  // isAnnotation
-  // isAnnotationPresent
+
+  public static void testIsAnnotation() {
+    assertFalse(Object.class.isAnnotation());
+    assertTrue(Deprecated.class.isAnnotation()); 
+  }
+  @Retention(RetentionPolicy.RUNTIME) public @interface Deprecated { }
+
+  public static void testIsAnnotationPresent() {
+    assertFalse(Object.class.isAnnotationPresent(Deprecated.class));
+    assertFalse(AnnotatedClass.class.isAnnotationPresent(Generated.class));
+    assertTrue(AnnotatedClass.class.isAnnotationPresent(Deprecated.class));
+  }
+  @Generated @Deprecated public static class AnnotatedClass { }
+  public @interface Generated { }
 
   public static void testIsAnonymousClass() {
     assertFalse(Object.class.isAnonymousClass());
@@ -209,9 +227,12 @@ public class ClassTest extends TestCase {
     testCast();
     testDesiredAssertionStatus();
     testForName();
+    testGetAnnotations();
     testGetName();
     testGetSimpleName();
     testGetSuperclass();
+    testIsAnnotation();
+    testIsAnnotationPresent();
     testIsAnonymousClass();
     testIsArray();
     testIsAssignableFrom();
