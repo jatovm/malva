@@ -1,5 +1,6 @@
 package malva.java.lang;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.TypeVariable;
@@ -46,7 +47,12 @@ public class ClassTest extends TestCase {
 
   public static void testGetAnnotations() {
     assertEquals(0, Object.class.getAnnotations().length);
-    assertEquals(1, AnnotatedClass.class.getAnnotations().length);
+    assertEquals(Arrays.asList(Deprecated.class), transform(Arrays.asList(AnnotatedClass.class.getAnnotations()),
+      new Transformer<Annotation, Class<? extends Annotation>>() {
+        @Override public Class<? extends Annotation> transform(Annotation value) {
+          return value.annotationType();
+        }
+      }));
   }
 
   // getCanonicalName
