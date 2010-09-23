@@ -4,9 +4,20 @@ Malva
 What is Malva?
 --------------
 
-Malva is a test suite for alternative JVMs. It tests core Java API classes such
-as java.lang.Class and java.lang.Object that require implementation on the JVM
-side.
+Malva is a test suite for alternative JVMs. It tests core Java APIs such as
+'java.lang' and 'java.lang.reflect' require implementation on the JVM side. The
+primary goal for Malva is to find compatibility problems in alternative JVMs
+but its also useful as a regression test suite for JVM developers.
+
+The test cases look a lot like JUnit tests. We do not, however, use JUnit
+because it relies on core APIs such as annotation support and reflection that
+we want to test. Each test class is written as a standalone runnable class that
+implements the main() method to make sure tests are as isolated as possible.
+That should make pin-pointing the root cause of a bug easier to JVM developers.
+
+Malva targets the Java 1.6 APIs as described in the API specification at:
+
+  http://download.oracle.com/javase/6/docs/api/
 
 Running the Test Suite
 ----------------------
