@@ -3,6 +3,7 @@ package malva.java.lang;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.TypeVariable;
 import java.util.Arrays;
 import malva.TestCase;
@@ -81,7 +82,23 @@ public class ClassTest extends TestCase {
   // getInterfaces
   // getMethod
   // getMethods
-  // getModifiers
+
+  public static void testGetModifiers() {
+    assertEquals(Modifier.FINAL, FinalClass.class.getModifiers());
+    assertEquals(Modifier.ABSTRACT, AbstractClass.class.getModifiers());
+    assertEquals(Modifier.STATIC, StaticClass.class.getModifiers());
+    assertEquals(0, PackagePrivatePublic.class.getModifiers());
+    assertEquals(Modifier.PRIVATE, Private.class.getModifiers());
+    assertEquals(Modifier.PROTECTED, Protected.class.getModifiers());
+    assertEquals(Modifier.PUBLIC, Public.class.getModifiers());
+  }
+  abstract class AbstractClass { }
+  class PackagePrivatePublic { }
+  final class FinalClass { }
+  private class Private { }
+  protected class Protected { }
+  public class Public { }
+  static class StaticClass { }
 
   public static void testGetName() {
     assertEquals("int", int.class.getName());
@@ -245,6 +262,7 @@ public class ClassTest extends TestCase {
     testDesiredAssertionStatus();
     testForName();
     testGetAnnotations();
+    testGetModifiers();
     testGetName();
     testGetSimpleName();
     testGetSuperclass();
