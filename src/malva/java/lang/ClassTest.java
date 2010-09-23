@@ -2,6 +2,8 @@ package malva.java.lang;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.TypeVariable;
+import java.util.Arrays;
 import malva.TestCase;
 
 public class ClassTest extends TestCase {
@@ -105,7 +107,16 @@ public class ClassTest extends TestCase {
     assertEquals(Throwable.class, Exception.class.getSuperclass());
   }
 
-  // getTypeParameters
+  public static void testGetTypeParameters() {
+    assertEquals(0, Object.class.getTypeParameters().length);
+    assertEquals(Arrays.asList("T", "V"), transform(Arrays.asList(GenericClass.class.getTypeParameters()),
+      new Transformer<TypeVariable<Class<GenericClass>>, String>() {
+        @Override public String transform(TypeVariable<Class<GenericClass>> value) {
+          return value.getName();
+        }
+      }));
+  }
+  public static class GenericClass<T, V> { };
 
   public static void testIsAnnotation() {
     assertFalse(Object.class.isAnnotation());
@@ -231,6 +242,7 @@ public class ClassTest extends TestCase {
     testGetName();
     testGetSimpleName();
     testGetSuperclass();
+    testGetTypeParameters();
     testIsAnnotation();
     testIsAnnotationPresent();
     testIsAnonymousClass();

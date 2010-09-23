@@ -1,7 +1,21 @@
 package malva;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestCase {
-  public interface Block {
+  protected static <T, V> List<V> transform(List<T> values, Transformer<T, V> transformer) {
+    List<V> result = new ArrayList<V>();
+    for (T value : values) {
+      result.add(transformer.transform(value));
+    }
+    return result;
+  }
+  protected interface Transformer<T, V> {
+    V transform(T value);
+  }
+
+  protected interface Block {
     void run() throws Throwable;
   }
 
