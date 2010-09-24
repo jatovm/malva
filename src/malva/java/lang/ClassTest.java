@@ -79,11 +79,6 @@ public class ClassTest extends TestCase {
         }
     }));
   }
-  public static class Methods {
-    public void foo() { }
-    protected void bar() { }
-    private void baz() { }
-  }
 
   // getDeclaringClass
   // getEnclosingClass
@@ -96,7 +91,21 @@ public class ClassTest extends TestCase {
   // getGenericSuperclass
   // getInterfaces
   // getMethod
-  // getMethods
+
+  public static void testGetMethods() {
+    assertEqualsUnordered(Arrays.<String>asList("equals", "foo", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait", "wait", "wait"),
+                          transform(Arrays.asList(Methods.class.getMethods()),
+      new Transformer<Method, String>() {
+        @Override public String transform(Method m) {
+          return m.getName();
+        }
+    }));
+  }
+  public static class Methods {
+    public void foo() { }
+    protected void bar() { }
+    private void baz() { }
+  }
 
   public static void testGetModifiers() {
     assertEquals(Modifier.FINAL, FinalClass.class.getModifiers());
@@ -278,6 +287,7 @@ public class ClassTest extends TestCase {
     testForName();
     testGetAnnotations();
     testGetDeclaredMethods();
+    testGetMethods();
     testGetModifiers();
     testGetName();
     testGetSimpleName();
