@@ -3,6 +3,7 @@ package malva.java.lang;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.TypeVariable;
 import java.util.Arrays;
@@ -69,7 +70,21 @@ public class ClassTest extends TestCase {
   // getDeclaredField
   // getDeclaredFields
   // getDeclaredMethod
-  // getDeclaredMethods
+
+  public static void testGetDeclaredMethods() {
+    assertEqualsUnordered(Arrays.<String>asList("foo", "bar", "baz"), transform(Arrays.asList(Methods.class.getDeclaredMethods()),
+      new Transformer<Method, String>() {
+        @Override public String transform(Method m) {
+          return m.getName();
+        }
+    }));
+  }
+  public static class Methods {
+    public void foo() { }
+    protected void bar() { }
+    private void baz() { }
+  }
+
   // getDeclaringClass
   // getEnclosingClass
   // getEnclosingConstructor
@@ -262,6 +277,7 @@ public class ClassTest extends TestCase {
     testDesiredAssertionStatus();
     testForName();
     testGetAnnotations();
+    testGetDeclaredMethods();
     testGetModifiers();
     testGetName();
     testGetSimpleName();

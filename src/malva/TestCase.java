@@ -1,6 +1,8 @@
 package malva;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class TestCase {
@@ -35,6 +37,14 @@ public class TestCase {
 
   protected static void assertFalse(boolean actual) {
     assertEquals(false, actual);
+  }
+
+  protected static <T extends Comparable<? super T>> void assertEqualsUnordered(Collection<T> expected, Collection<T> actual) {
+    List<T> e = new ArrayList<T>(expected);
+    Collections.sort(e);
+    List<T> a = new ArrayList<T>(actual);
+    Collections.sort(a);
+    assertEquals(e, a);
   }
 
   protected static void assertEquals(Object expected, Object actual) {
