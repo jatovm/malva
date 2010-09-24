@@ -1,11 +1,16 @@
 package malva;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class TestCase {
+  protected static <T, V> List<V> transform(T[] values, Transformer<T, V> transformer) {
+    return transform(Arrays.asList(values), transformer);
+  }
+
   protected static <T, V> List<V> transform(List<T> values, Transformer<T, V> transformer) {
     List<V> result = new ArrayList<V>();
     for (T value : values) {

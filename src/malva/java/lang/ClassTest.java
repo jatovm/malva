@@ -49,7 +49,7 @@ public class ClassTest extends TestCase {
 
   public static void testGetAnnotations() {
     assertEquals(0, Object.class.getAnnotations().length);
-    assertEquals(Arrays.<Class<?>>asList(Deprecated.class), transform(Arrays.asList(AnnotatedClass.class.getAnnotations()),
+    assertEquals(Arrays.<Class<?>>asList(Deprecated.class), transform(AnnotatedClass.class.getAnnotations(),
       new Transformer<Annotation, Class<? extends Annotation>>() {
         @Override public Class<? extends Annotation> transform(Annotation value) {
           return value.annotationType();
@@ -72,7 +72,7 @@ public class ClassTest extends TestCase {
   // getDeclaredMethod
 
   public static void testGetDeclaredMethods() {
-    assertEqualsUnordered(Arrays.<String>asList("foo", "bar", "baz"), transform(Arrays.asList(Methods.class.getDeclaredMethods()),
+    assertEqualsUnordered(Arrays.<String>asList("foo", "bar", "baz"), transform(Methods.class.getDeclaredMethods(),
       new Transformer<Method, String>() {
         @Override public String transform(Method m) {
           return m.getName();
@@ -94,7 +94,7 @@ public class ClassTest extends TestCase {
 
   public static void testGetMethods() {
     assertEqualsUnordered(Arrays.<String>asList("equals", "foo", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait", "wait", "wait"),
-                          transform(Arrays.asList(Methods.class.getMethods()),
+                          transform(Methods.class.getMethods(),
       new Transformer<Method, String>() {
         @Override public String transform(Method m) {
           return m.getName();
@@ -156,7 +156,7 @@ public class ClassTest extends TestCase {
 
   public static void testGetTypeParameters() {
     assertEquals(0, Object.class.getTypeParameters().length);
-    assertEquals(Arrays.asList("T", "V"), transform(Arrays.asList(GenericClass.class.getTypeParameters()),
+    assertEquals(Arrays.asList("T", "V"), transform(GenericClass.class.getTypeParameters(),
       new Transformer<TypeVariable<Class<GenericClass>>, String>() {
         @Override public String transform(TypeVariable<Class<GenericClass>> value) {
           return value.getName();
