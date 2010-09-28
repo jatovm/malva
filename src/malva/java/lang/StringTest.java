@@ -3,6 +3,7 @@ package malva.java.lang;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
+import java.util.regex.PatternSyntaxException;
 
 import malva.TestCase;
 
@@ -130,7 +131,10 @@ public class StringTest extends TestCase {
     assertTrue(str1.intern() == (" " + "" + "AB" + "C" + "").trim().toLowerCase().intern());
   }
 
-  // isEmpty
+  public static void testIsEmpty() {
+    assertTrue("".isEmpty());
+    assertFalse(" ".isEmpty());
+  }
 
   public static void testLastIndexOf() {
     assertEquals(1, "ää".lastIndexOf("ä"));
@@ -139,8 +143,21 @@ public class StringTest extends TestCase {
     assertEquals(-1, "".lastIndexOf(" "));
   }
 
-  // length
-  // matches
+  public static void testLength() {
+    assertEquals(0, "".length());
+    assertEquals(1, " ".length());
+  }
+
+  public static void testMatches() {
+    assertTrue("aab".matches("a*b"));
+    assertFalse("baa".matches("b*a"));
+    assertThrows(new Block() {
+      @Override public void run() {
+        "{".matches("{");
+      }
+    }, PatternSyntaxException.class);
+  }
+
   // offsetByCodePoints
 
   public static void testRegionMatches() {
@@ -160,9 +177,21 @@ public class StringTest extends TestCase {
     assertEquals("  ", " ".replace(" ", "  "));
   }
 
-  // replaceAll
-  // replaceFirst
-  // split
+  public static void testReplaceAll() {
+    assertEquals("aaaa", "abab".replaceAll("ab", "aa"));
+  }
+
+  public static void testReplaceFirst() {
+    assertEquals("aaab", "abab".replaceFirst("ab", "aa"));
+  }
+
+  public static void testSplit() {
+    assertEquals("aaaa", "aaaa".split("b")[0]);
+    assertEquals(3, "boo:and:foo".split(":").length);
+    assertEquals(":and:f", "boo:and:foo".split("o")[2]);
+    assertEquals("and:foo", "boo:and:foo".split(":", 2)[1]);
+    assertEquals("foo", "boo:and:foo".split(":", -2)[2]);
+  }
 
   public static void testStartsWith() {
     assertTrue ("åäö".startsWith("ä", 1));
@@ -263,11 +292,16 @@ public class StringTest extends TestCase {
     testHashCode();
     testIndexOf();
     testIntern();
+    testIsEmpty();
     testLastIndexOf();
+    testLength();
+    testMatches();
     testNewInstance();
     testRegionMatches();
     testReplace();
-    testReplace();
+    testReplaceAll();
+    testReplaceFirst();
+    testSplit();
     testStartsWith();
     testSubSequence();
     testSubstring();
