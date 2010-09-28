@@ -81,9 +81,35 @@ public class StringTest extends TestCase {
     assertTrue("åäö".endsWith("ö"));
   }
 
-  // equals
-  // equalsIgnoreCase
-  // format
+  public static void testEquals() {
+    assertTrue("".equals(new String("")));
+    assertFalse("A".equals(new String("a")));
+  }
+
+  public static void testEqualsIgnoreCase() {
+    assertTrue("".equalsIgnoreCase(new String("")));
+    assertTrue("A".equalsIgnoreCase(new String("a")));
+    assertFalse("A".equalsIgnoreCase(new String("b")));
+  }
+
+  public static void testFormat() {
+    assertEquals(" d  c  b  a", String.format("%4$2s %3$2s %2$2s %1$2s", "a", "b", "c", "d"));
+    assertEquals("e =    +2,7183", String.format(Locale.FRANCE, "e = %+10.4f", Math.E));
+    assertEquals("false", String.format("%b", (Object[])null));
+    assertEquals("null", String.format("%h", (Object[])null));
+    assertEquals("null", String.format("%s", (Object[])null));
+    assertEquals("null", String.format("%c", (Object[])null));
+    assertEquals("null", String.format("%d", (Object[])null));
+    assertEquals("null", String.format("%o", (Object[])null));
+    assertEquals("null", String.format("%x", (Object[])null));
+    assertEquals("null", String.format("%e", (Object[])null));
+    assertEquals("null", String.format("%f", (Object[])null));
+    assertEquals("null", String.format("%g", (Object[])null));
+    assertEquals("null", String.format("%a", (Object[])null));
+    assertEquals("null", String.format("%tm", (Object[])null));
+    assertEquals("%", String.format("%%", (Object[])null));
+    assertEquals(System.getProperties().getProperty("line.separator"), String.format("%n", (Object[])null));
+  }
 
   public static void testGetBytes() {
     assertEquals(new String("åäö".getBytes(Charset.defaultCharset())), new String("åäö".getBytes()));
@@ -287,6 +313,9 @@ public class StringTest extends TestCase {
     testContains();
     testCopyValueOf();
     testEndsWith();
+    testEquals();
+    testEqualsIgnoreCase();
+    testFormat();
     testGetBytes();
     testGetChars();
     testHashCode();
