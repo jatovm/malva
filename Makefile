@@ -19,6 +19,7 @@ CLASSES	+= src/malva/TestCase.class
 CLASSES	+= src/malva/java/lang/ClassTest.class
 CLASSES	+= src/malva/java/lang/DoubleTest.class
 CLASSES	+= src/malva/java/lang/FloatTest.class
+CLASSES	+= src/malva/java/lang/MathTest.class
 CLASSES	+= src/malva/java/lang/StringTest.class
 
 SRC	:= $(patsubst %.class,%.java,$(CLASSES))
