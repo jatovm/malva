@@ -248,7 +248,7 @@ public class SystemTest extends TestCase {
     PrintStream originalOut = System.out;
     try {
       PrintStream newOut = new PrintStream(new ByteArrayOutputStream());
-      System.setErr(newOut);
+      System.setOut(newOut);
       assertEquals(newOut, System.out);
     } finally {
       System.setOut(originalOut);
@@ -282,10 +282,10 @@ public class SystemTest extends TestCase {
     testCurrentTimeMillis();
     testExit();
     testGc();
-    testGetenv();
     testGetProperties();
     testGetProperty();
     testGetSecurityManager();
+    testGetenv();
     testIdentityHashCode();
     testInheritedChannel();
     testLoad();
@@ -295,8 +295,7 @@ public class SystemTest extends TestCase {
     testRunFinalization();
     testSetErr();
     testSetIn();
-//  FIXME: FAILS
-//  testSetOut();
+    testSetOut();
     testSetProperties();
     testSetSecurityManager();
   }
