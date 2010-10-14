@@ -3,6 +3,7 @@ package malva.java.lang;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.TypeVariable;
@@ -80,17 +81,61 @@ public class ClassTest extends TestCase {
     }));
   }
 
-  // getDeclaringClass
+  public static void testGetDeclaringClass() {
+    assertNull(Object.class.getDeclaringClass());
+    assertEquals(ClassTest.class, InnerClass.class.getDeclaringClass());
+  }
+
   // getEnclosingClass
   // getEnclosingConstructor
   // getEnclosingMethod
   // getEnumConstants
-  // getField
-  // getFields
+
+  public static void testGetField() throws NoSuchFieldException {
+    assertEquals("objectField", Fields.class.getField("objectField").getName());
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        Object.class.getField("noSuchField");
+      }
+    }, NoSuchFieldException.class);
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        Object.class.getField(null);
+      }
+    }, NullPointerException.class);
+    /// XXX: SecurityException?
+  }
+
+  public static void testGetFields() {
+    assertEqualsUnordered(Arrays.<String>asList("intField", "objectField"), transform(Fields.class.getFields(),
+      new Transformer<Field, String>() {
+        @Override public String transform(Field f) {
+          return f.getName();
+        }
+    }));
+  }
+  public static class Fields {
+    public Object objectField;
+    public int intField;
+  }
   // getGenericInterfaces
   // getGenericSuperclass
   // getInterfaces
-  // getMethod
+
+  public static void testGetMethod() throws NoSuchMethodException {
+    assertEquals("hashCode", Object.class.getMethod("hashCode").getName());
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        Object.class.getMethod("noSuchMethod");
+      }
+    }, NoSuchMethodException.class);
+    assertThrows(new Block() {
+      @Override public void run() throws Throwable {
+        Object.class.getMethod(null);
+      }
+    }, NullPointerException.class);
+    /// XXX: SecurityException?
+  }
 
   public static void testGetMethods() {
     assertEqualsUnordered(Arrays.<String>asList("equals", "foo", "getClass", "hashCode", "notify", "notifyAll", "toString", "wait", "wait", "wait"),
@@ -133,8 +178,14 @@ public class ClassTest extends TestCase {
     assertEquals("malva.java.lang.ClassTest$InnerClass", InnerClass.class.getName());
   }
 
-  // getPackage
-  // getProtectionDomain
+  public static void testGetPackage() {
+    assertEquals("java.lang", Object.class.getPackage().getName());
+  }
+
+  public static void testGetProtectionDomain() {
+    assertNotNull(Object.class.getProtectionDomain());
+  }
+
   // getResource
   // getResourceAsStream
   // getSigners
@@ -287,9 +338,15 @@ public class ClassTest extends TestCase {
     testForName();
     testGetAnnotations();
     testGetDeclaredMethods();
+    testGetDeclaringClass();
+    testGetField();
+    testGetFields();
+    testGetMethod();
     testGetMethods();
     testGetModifiers();
     testGetName();
+    testGetPackage();
+    testGetProtectionDomain();
     testGetSimpleName();
     testGetSuperclass();
     testGetTypeParameters();
