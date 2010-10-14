@@ -68,13 +68,8 @@ public class NetworkInterfaceTest extends TestCase {
   }
 
   public static void testIsLoopback() throws Exception {
-    for (NetworkInterface iface : getNetworkInterfaces()) {
-      if (iface.isLoopback()) {
-        for (InetAddress addr : getInetAddresses(iface)) {
-          assertTrue(addr.isLoopbackAddress());
-        }
-      }
-    }
+    assertTrue (NetworkInterface.getByName("127.0.0.1").isLoopback());
+    assertFalse(NetworkInterface.getByName("192.168.0.1").isLoopback());
   }
 
   public static void testToString() throws Exception {
@@ -116,8 +111,6 @@ public class NetworkInterfaceTest extends TestCase {
     testGetByName();
     testGetByInetAddress();
     testGetMTU();
-    // FIXME: BROKEN
-    // testIsLoopback();
     testToString();
   }
 }

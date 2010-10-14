@@ -24,6 +24,7 @@ CLASSES	+= src/malva/java/lang/StringTest.class
 CLASSES += src/malva/java/lang/RuntimeTest.class
 CLASSES += src/malva/java/lang/SystemTest.class
 CLASSES += src/malva/java/lang/ThrowableTest.class
+CLASSES += src/malva/java/net/InetAddressTest.class
 CLASSES += src/malva/java/net/NetworkInterfaceTest.class
 
 SRC	:= $(patsubst %.class,%.java,$(CLASSES))
