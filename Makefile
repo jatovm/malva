@@ -20,6 +20,7 @@ CLASSES	+= src/malva/java/lang/ClassTest.class
 CLASSES	+= src/malva/java/lang/DoubleTest.class
 CLASSES	+= src/malva/java/lang/FloatTest.class
 CLASSES	+= src/malva/java/lang/MathTest.class
+CLASSES += src/malva/java/lang/ObjectTest.class
 CLASSES	+= src/malva/java/lang/StringTest.class
 CLASSES += src/malva/java/lang/RuntimeTest.class
 CLASSES += src/malva/java/lang/SystemTest.class
