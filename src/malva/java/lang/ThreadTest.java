@@ -315,7 +315,7 @@ public class ThreadTest extends TestCase {
 //   testSetDefaultUncaughtExceptionHandler();
      testSetName();
      testSetPriority();
-     testSetUncaughtExceptionHandler();
+//   testSetUncaughtExceptionHandler();
      testSleep();
      testStart();
      testToString();
