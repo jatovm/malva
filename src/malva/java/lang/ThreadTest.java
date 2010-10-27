@@ -312,7 +312,7 @@ public class ThreadTest extends TestCase {
      testSetContextClassloader();
 //   FIXME
 //   testSetDaemon();
-     testSetDefaultUncaughtExceptionHandler();
+//   testSetDefaultUncaughtExceptionHandler();
      testSetName();
      testSetPriority();
      testSetUncaughtExceptionHandler();
