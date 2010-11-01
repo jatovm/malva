@@ -112,6 +112,7 @@ public class ThreadTest extends TestCase {
     Thread.currentThread().interrupt();
     assertTrue(Thread.currentThread().isInterrupted());
     assertTrue(Thread.currentThread().isInterrupted());
+    Thread.interrupted();
   }
 
   public static void testJoin() {
@@ -132,6 +133,7 @@ public class ThreadTest extends TestCase {
       thread.join();
       assertEquals("true", sb.toString());
     } catch (InterruptedException e) {
+      throw new RuntimeException();
     }
   }
 
@@ -310,12 +312,11 @@ public class ThreadTest extends TestCase {
      testJoin();
      testRun();
      testSetContextClassloader();
-//   FIXME
-//   testSetDaemon();
-//   testSetDefaultUncaughtExceptionHandler();
+     testSetDaemon();
+     testSetDefaultUncaughtExceptionHandler();
      testSetName();
      testSetPriority();
-//   testSetUncaughtExceptionHandler();
+     testSetUncaughtExceptionHandler();
      testSleep();
      testStart();
      testToString();
