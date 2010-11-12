@@ -58,7 +58,13 @@ public class ClassTest extends TestCase {
       }));
   }
 
-  // getCanonicalName
+  public static void testGetCanonicalName() {
+    assertEquals("java.lang.Object", Object.class.getCanonicalName());
+    assertNull(new Object() { }.getClass().getCanonicalName());
+    class Local { };
+    assertNull(Local.class.getCanonicalName());
+  }
+
   // getClasses
   // getClassLoader
   // getComponentType
@@ -337,6 +343,7 @@ public class ClassTest extends TestCase {
     testDesiredAssertionStatus();
     testForName();
     testGetAnnotations();
+    testGetCanonicalName();
     testGetDeclaredMethods();
     testGetDeclaringClass();
     testGetField();
