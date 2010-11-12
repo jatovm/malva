@@ -32,10 +32,10 @@ public class ProcessTest extends TestCase {
     }
 
     try {
-      ProcessBuilder processBuilder = new ProcessBuilder("more", "LICENSE");
+      ProcessBuilder processBuilder = new ProcessBuilder("sleep", "10");
       final Process process = processBuilder.start();
 
-      assertThrows(new Block(){
+      assertThrows(new Block() {
         @Override public void run() {
           process.exitValue();
         }
