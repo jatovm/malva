@@ -84,10 +84,12 @@ public class MathTest extends TestCase {
   }
 
   public static void testCopySign() {
+/* @since 1.6
     assertEquals(0.0, Math.copySign(0.0d, 0.0d));
     assertEquals(-0.0, Math.copySign(0.0d, -0.0d));
     assertEquals(0.0f, Math.copySign(0.0f, 0.0f));
     assertEquals(-0.0f, Math.copySign(0.0f, -0.0f));
+*/
   }
 
   public static void testCos() {
@@ -129,6 +131,7 @@ public class MathTest extends TestCase {
   }
 
   public static void testGetExponent() {
+/* @since 1.6
     assertEquals(1, Math.getExponent(2));
     assertEquals(2, Math.getExponent(4));
     assertEquals(Double.MAX_EXPONENT + 1, Math.getExponent(Double.NaN));
@@ -142,7 +145,7 @@ public class MathTest extends TestCase {
     assertEquals(Float.MAX_EXPONENT + 1, Math.getExponent(Float.POSITIVE_INFINITY));
     assertEquals(Float.MAX_EXPONENT + 1, Math.getExponent(Float.NEGATIVE_INFINITY));
     assertEquals(Float.MIN_EXPONENT - 1, Math.getExponent(0.0f));
-
+*/
   }
 
   public static void testHypot() {
@@ -232,6 +235,7 @@ public class MathTest extends TestCase {
   }
 
   public static void testNextAfter() {
+/* @since 1.6
     assertEquals(1.0, Math.nextAfter(1.0-Math.ulp(0.0), 1.0));
     assertEquals(Math.ulp(0.0), Math.nextAfter(0.0, 1.0));
     assertEquals(Double.NaN, Math.nextAfter(Double.NaN, 0.0));
@@ -257,9 +261,11 @@ public class MathTest extends TestCase {
     assertEquals(-Float.MAX_VALUE, Math.nextAfter(Float.NEGATIVE_INFINITY, 0.0));
     assertEquals(Float.POSITIVE_INFINITY, Math.nextAfter(Float.MAX_VALUE, Double.POSITIVE_INFINITY));
     assertEquals(Float.NEGATIVE_INFINITY, Math.nextAfter(-Float.MAX_VALUE, Double.NEGATIVE_INFINITY));
+*/
   }
 
   public static void testNextUp() {
+/* @since 1.6
     assertEquals(Math.ulp(0.0), Math.nextUp(0.0));
     assertEquals(Double.NaN, Math.nextUp(Double.NaN));
     assertEquals(Double.POSITIVE_INFINITY, Math.nextUp(Double.POSITIVE_INFINITY));
@@ -269,6 +275,7 @@ public class MathTest extends TestCase {
     assertEquals(Float.NaN, Math.nextUp(Float.NaN));
     assertEquals(Float.POSITIVE_INFINITY, Math.nextUp(Float.POSITIVE_INFINITY));
     assertEquals(Float.MIN_VALUE, Math.nextUp(0.0f));
+*/
   }
 
   public static void testPow() {
@@ -338,6 +345,7 @@ public class MathTest extends TestCase {
   }
 
   public static void testScalb() {
+/* @since 1.6
     assertEquals(0.0, Math.scalb(0.0, 0));
     assertEquals(2.0, Math.scalb(1.0, 1));
     assertEquals(Double.NaN, Math.scalb(Double.NaN, 1));
@@ -353,6 +361,7 @@ public class MathTest extends TestCase {
     assertEquals(Float.NEGATIVE_INFINITY, Math.scalb(Float.NEGATIVE_INFINITY, 1));
     assertEquals(0.0f, Math.scalb(0.0f, 1));
     assertEquals(-0.0f, Math.scalb(-0.0f, 1));
+*/
   }
 
   public static void testSignum() {
