@@ -159,6 +159,7 @@ public class ClassTest extends TestCase {
   }
 
   public static void testGetModifiers() {
+    assertEquals(Modifier.PUBLIC, Object.class.getModifiers());
     assertEquals(Modifier.FINAL, FinalClass.class.getModifiers());
     assertEquals(Modifier.ABSTRACT, AbstractClass.class.getModifiers());
     assertEquals(Modifier.STATIC, StaticClass.class.getModifiers());
