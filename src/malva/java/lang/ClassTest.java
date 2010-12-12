@@ -167,6 +167,8 @@ public class ClassTest extends TestCase {
     assertEquals(Modifier.PRIVATE, Private.class.getModifiers());
     assertEquals(Modifier.PROTECTED, Protected.class.getModifiers());
     assertEquals(Modifier.PUBLIC, Public.class.getModifiers());
+
+    assertEquals(Modifier.FINAL | Modifier.ABSTRACT, StaticClass[].class.getModifiers());
   }
   abstract class AbstractClass { }
   class PackagePrivatePublic { }
