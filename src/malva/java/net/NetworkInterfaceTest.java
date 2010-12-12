@@ -106,11 +106,13 @@ public class NetworkInterfaceTest extends TestCase {
   public static void main(String[] args) throws Exception {
     testGetName();
     testGetInetAddresses();
-    testGetInterfaceAddresses();
-    testGetSubInterfacesAndGetParent();
     testGetByName();
     testGetByInetAddress();
-    testGetMTU();
     testToString();
+/* @since 1.6
+    testGetInterfaceAddresses();
+    testGetSubInterfacesAndGetParent();
+    testGetMTU();
+*/
   }
 }
