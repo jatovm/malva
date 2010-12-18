@@ -1,8 +1,10 @@
 package malva.java.lang;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -56,7 +58,17 @@ public class ClassTest extends TestCase {
           return value.annotationType();
         }
       }));
+    assertEquals(Arrays.<String>asList("unused"), transform(UnusedClass.class.getAnnotations(),
+      new Transformer<Annotation, String>() {
+        @Override public String transform(Annotation value) {
+          SuppressWarnings x = (SuppressWarnings) value;
+          return x.value();
+        }
+      }));
   }
+  @Retention(RetentionPolicy.RUNTIME) @Target(ElementType.TYPE) public @interface SuppressWarnings { String value(); }
+
+  @SuppressWarnings("unused") static class UnusedClass { }
 
   public static void testGetCanonicalName() {
     assertEquals("java.lang.Object", Object.class.getCanonicalName());
