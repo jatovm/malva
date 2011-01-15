@@ -52,6 +52,27 @@ public class TestCase {
     assertEquals(e, a);
   }
 
+  protected static void assertEquals(int[] expected, int[] actual) {
+    if (expected == null && actual == null)
+      return;
+
+    if (expected == null || actual == null) {
+      fail("Expected " + expected + ", but was: " + actual);
+      return;
+    }
+
+    assertEquals(toList(expected), toList(actual));
+  }
+
+  protected static List<Integer> toList(int[] array) {
+    if (array == null)
+      return null;
+    List<Integer> result = new ArrayList<Integer>();
+    for (int i = 0; i < array.length; i++)
+      result.add(array[i]);
+    return result;
+  }
+
   protected static void assertEquals(Object expected, Object actual) {
     if (expected == actual)
        return;

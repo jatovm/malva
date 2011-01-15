@@ -1,7 +1,7 @@
 package malva.java.lang;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -65,10 +65,19 @@ public class ClassTest extends TestCase {
           return x.value();
         }
       }));
+      assertEquals(new int[] { Integer.MIN_VALUE, Integer.MAX_VALUE }, getIntArrayAnnotationElements());
   }
   @Retention(RetentionPolicy.RUNTIME) @Target(ElementType.TYPE) public @interface SuppressWarnings { String value(); }
 
   @SuppressWarnings("unused") static class UnusedClass { }
+
+  public static int[] getIntArrayAnnotationElements() {
+    IntArrayAnnotation annotation = (IntArrayAnnotation) IntArrayAnnotatedClass.class.getAnnotations()[0];
+    return annotation.value();
+  }
+  @Retention(RetentionPolicy.RUNTIME) @Target(ElementType.TYPE) public @interface IntArrayAnnotation { int[] value(); }
+
+  @IntArrayAnnotation(value={Integer.MIN_VALUE, Integer.MAX_VALUE}) static class IntArrayAnnotatedClass { }
 
   public static void testGetCanonicalName() {
     assertEquals("java.lang.Object", Object.class.getCanonicalName());
