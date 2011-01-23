@@ -111,7 +111,9 @@ public class InetAddressTest extends TestCase {
   }
 
   public static void testIsReachable() throws Exception {
+/* @since 1.5
     assertTrue(InetAddress.getLocalHost().isReachable(100));
+*/
   }
 
   public static void testIsSiteLocalAddress() throws Exception {
