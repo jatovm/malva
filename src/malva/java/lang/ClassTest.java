@@ -111,9 +111,19 @@ public class ClassTest extends TestCase {
   public static void testGetDeclaringClass() {
     assertNull(Object.class.getDeclaringClass());
     assertEquals(ClassTest.class, InnerClass.class.getDeclaringClass());
+    class LocalClass {
+    }
+    assertEquals(null, LocalClass.class.getDeclaringClass());
   }
 
-  // getEnclosingClass
+  public static void testGetEnclosingClass() {
+    assertNull(Object.class.getEnclosingClass());
+    assertEquals(ClassTest.class, InnerClass.class.getEnclosingClass());
+    class LocalClass {
+    }
+    assertEquals(ClassTest.class, LocalClass.class.getEnclosingClass());
+  }
+
   // getEnclosingConstructor
   // getEnclosingMethod
   // getEnumConstants
@@ -370,6 +380,7 @@ public class ClassTest extends TestCase {
     testGetCanonicalName();
     testGetDeclaredMethods();
     testGetDeclaringClass();
+    testGetEnclosingClass();
     testGetField();
     testGetFields();
     testGetMethod();
