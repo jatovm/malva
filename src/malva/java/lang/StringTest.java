@@ -93,6 +93,7 @@ public class StringTest extends TestCase {
   }
 
   public static void testFormat() {
+    assertEquals("00001234", String.format("%08x", 0x1234));
     assertEquals(" d  c  b  a", String.format("%4$2s %3$2s %2$2s %1$2s", "a", "b", "c", "d"));
     assertEquals("e =    +2,7183", String.format(Locale.FRANCE, "e = %+10.4f", Math.E));
     assertEquals("false", String.format("%b", (Object[])null));
