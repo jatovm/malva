@@ -16,9 +16,16 @@ public class RuntimeTest extends TestCase {
 
     assertThrows(new Block() {
       @Override public void run() {
-        Thread shutdownHook = new Thread();
-        shutdownHook.start();
-        rt.addShutdownHook(shutdownHook);
+        Thread shutdownHook = new Thread() {
+          @Override public void run() {
+            synchronized(RuntimeTest.class) {
+            }
+          }
+        };
+        synchronized(RuntimeTest.class) {
+          shutdownHook.start();
+          rt.addShutdownHook(shutdownHook);
+        }
       }
     }, IllegalArgumentException.class);
   }
@@ -106,8 +113,7 @@ public class RuntimeTest extends TestCase {
   }
 
   public static void main(String[] args) throws IOException {
-    // FAILS:
-    // testAddShutdownHook();
+    testAddShutdownHook();
     testAvailableProcessors();
     testExec();
     testExit();
