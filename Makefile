@@ -29,6 +29,8 @@ CLASSES += src/malva/java/lang/RuntimeTest.class
 CLASSES += src/malva/java/lang/SystemTest.class
 CLASSES += src/malva/java/lang/ThreadTest.class
 CLASSES += src/malva/java/lang/ThrowableTest.class
+CLASSES += src/malva/java/lang/invoke/MethodHandleTest.class
+CLASSES += src/malva/java/lang/invoke/MethodTypeTest.class
 CLASSES += src/malva/java/net/InetAddressTest.class
 CLASSES += src/malva/java/net/NetworkInterfaceTest.class
 CLASSES += src/malva/java/nio/DirectByteBufferTest.class
@@ -38,7 +40,7 @@ SRC	:= $(patsubst %.class,%.java,$(CLASSES))
 
 %.class: %.java
 	$(E) "  JAVAC   " $<
-	$(Q) $(JAVAC) -g -Xlint:unchecked -source 1.6 -target 1.6 -encoding utf8 -cp src $<
+	$(Q) $(JAVAC) -g -Xlint:unchecked -source 1.7 -target 1.7 -encoding utf8 -cp src $<
 
 all: $(CLASSES)
 .PHONY: all
