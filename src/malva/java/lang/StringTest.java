@@ -1,6 +1,5 @@
 package malva.java.lang;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.regex.PatternSyntaxException;
